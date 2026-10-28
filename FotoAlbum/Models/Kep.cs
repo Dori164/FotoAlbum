@@ -17,6 +17,8 @@ namespace FotoAlbum.Models
         public string Leiras { get; set; }
         public DateTime FeltoltesDatuma { get; set; }
 
+        public Album Album { get; set; }
+
 
 
     }

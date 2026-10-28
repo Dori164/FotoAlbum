@@ -10,5 +10,7 @@ namespace FotoAlbum.Models
         public string Cim { get; set; }
         public string Leiras { get; set; }
         public DateTime Letrehozva { get; set; }
+
+        public List<Kep> Kep { get; set; } = new List<Kep>();
     }
 }
