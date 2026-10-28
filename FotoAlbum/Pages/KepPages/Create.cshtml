@@ -1,0 +1,75 @@
+@page
+@model FotoAlbum.Pages.KepPages.CreateModel
+
+@{
+    ViewData["Title"] = "Kép hozzáadása";
+}
+
+<h1>Kép hozzáadása</h1>
+@if (Model.Album is not null)
+{
+    <h4>@Model.Album.Cim</h4>
+}
+
+<h4>Kep</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.Album is null)
+            {
+                <div class="form-group">
+                    <label asp-for="AlbumId" class="control-label">Album</label>
+                    <select asp-for="AlbumId" class="form-select">
+                        <option value="">-- Válassz albumot --</option>
+                        @foreach (var album in Model.Albums)
+                        {
+                            <option value="@album.Id">@album.Cim</option>
+                        }
+                    </select>
+                    <span asp-validation-for="AlbumId" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="AlbumId" />
+            }
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Cim" class="control-label">Cím</label>
+                <input asp-for="Cim" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Cim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="FeltoltottFajl" class="control-label">Képfájl</label>
+                <input asp-for="FeltoltottFajl" class="form-control" accept=".jpg,.jpeg,.png,.gif,.webp" />
+                <span asp-validation-for="FeltoltottFajl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Leiras" class="control-label">Leírás</label>
+                <textarea asp-for="Leiras" class="form-control"></textarea>
+                <span asp-validation-for="Leiras" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Feltöltés" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @if (Model.Album is not null)
+    {
+        <a asp-page="/AlbumPages/Details" asp-route-id="@Model.Album.Id">Vissza az albumhoz</a>
+    }
+    else
+    {
+        <a asp-page="./Index">Vissza a képekhez</a>
+    }
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

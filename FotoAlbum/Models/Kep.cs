@@ -10,14 +10,14 @@ namespace FotoAlbum.Models
         public int AlbumId { get; set; }
         [Required(ErrorMessage = "A cím megadása kötelező.")]
         [MaxLength(80, ErrorMessage = "A cím maximum 80 karakter hosszú lehet.")]
-        public string Cim { get; set; }
+        public string? Cim { get; set; }
         [Required(ErrorMessage = "A képhez érvényes url-t kell megadni.")]
         [Url(ErrorMessage = "A megadott url nem érvényes.")]
-        public string KepUrl { get; set; }
-        public string Leiras { get; set; }
+        public string? KepUrl { get; set; }
+        public string? Leiras { get; set; }
         public DateTime FeltoltesDatuma { get; set; }
 
-        public Album Album { get; set; }
+        public Album? Album { get; set; }
 
 
 

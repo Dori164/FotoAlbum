@@ -43,7 +43,14 @@ public class EditModel : PageModel
             return Page();
         }
 
-        _context.Attach(Album).State = EntityState.Modified;
+        var albumToUpdate = await _context.Album.FindAsync(Album.Id);
+        if (albumToUpdate is null)
+        {
+            return NotFound();
+        }
+
+        albumToUpdate.Cim = Album.Cim;
+        albumToUpdate.Leiras = Album.Leiras ?? string.Empty;
 
         try
         {
@@ -61,7 +68,7 @@ public class EditModel : PageModel
             }
         }
 
-        return RedirectToPage("./Index");
+        return RedirectToPage("./Details", new { id = Album.Id });
     }
 
     private bool AlbumExists(int id)

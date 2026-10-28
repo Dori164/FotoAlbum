@@ -1,0 +1,55 @@
+@page
+@model FotoAlbum.Pages.KepPages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Kep</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.AlbumId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.AlbumId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.Cim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.Cim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.KepUrl)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.KepUrl)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.Leiras)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.Leiras)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.FeltoltesDatuma)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.FeltoltesDatuma)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.Album)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.Album)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Kep.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

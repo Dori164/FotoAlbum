@@ -31,6 +31,8 @@ public class CreateModel : PageModel
             return Page();
         }
 
+        Album.Leiras ??= string.Empty;
+        Album.Letrehozva = DateTime.Now;
         _context.Album.Add(Album);
         await _context.SaveChangesAsync();
 

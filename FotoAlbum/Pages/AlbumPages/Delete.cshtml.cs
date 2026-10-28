@@ -25,7 +25,9 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        var album = await _context.Album.FirstOrDefaultAsync(m => m.Id == id);
+        var album = await _context.Album
+            .Include(item => item.Kep)
+            .FirstOrDefaultAsync(m => m.Id == id);
         if (album is null)
         {
             return NotFound();
@@ -49,6 +51,9 @@ public class DeleteModel : PageModel
         if (album != null)
         {
             Album = album;
+
+            var kepek = await _context.Kep.Where(kep => kep.AlbumId == album.Id).ToListAsync();
+            _context.Kep.RemoveRange(kepek);
             _context.Album.Remove(Album);
             await _context.SaveChangesAsync();
         }

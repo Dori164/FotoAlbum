@@ -1,0 +1,62 @@
+@page
+@model FotoAlbum.Pages.KepPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Kep</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Kep.Id" />
+            <div class="form-group">
+                <label asp-for="Kep.AlbumId" class="control-label"></label>
+                <input asp-for="Kep.AlbumId" class="form-control" />
+                <span asp-validation-for="Kep.AlbumId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Kep.Cim" class="control-label"></label>
+                <input asp-for="Kep.Cim" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Kep.Cim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Kep.KepUrl" class="control-label"></label>
+                <input asp-for="Kep.KepUrl" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Kep.KepUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kep.Leiras" class="control-label"></label>
+                <input asp-for="Kep.Leiras" class="form-control" />
+                <span asp-validation-for="Kep.Leiras" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kep.FeltoltesDatuma" class="control-label"></label>
+                <input asp-for="Kep.FeltoltesDatuma" class="form-control" />
+                <span asp-validation-for="Kep.FeltoltesDatuma" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kep.Album" class="control-label"></label>
+                <input asp-for="Kep.Album" class="form-control" />
+                <span asp-validation-for="Kep.Album" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

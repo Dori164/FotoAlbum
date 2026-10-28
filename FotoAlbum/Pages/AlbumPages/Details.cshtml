@@ -2,42 +2,77 @@
 @model FotoAlbum.Pages.AlbumPages.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.Album.Cim;
 }
 
-<h1>Details</h1>
+<h1>@Model.Album.Cim</h1>
 
 <div>
     <h4>Album</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Album.Cim)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Album.Cim)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Album.Leiras)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Album.Leiras)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Album.Letrehozva)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Album.Letrehozva)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Album.Kep)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Album.Kep)
-        </dd>
+        <dt class="col-sm-2">Leírás</dt>
+        <dd class="col-sm-10">@Model.Album.Leiras</dd>
+        <dt class="col-sm-2">Létrehozva</dt>
+        <dd class="col-sm-10">@Model.Album.Letrehozva.ToString("yyyy. MM. dd.")</dd>
     </dl>
 </div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Képek (@Model.Album.Kep.Count)</h2>
+    @if (Model.Album.Kep.Count < 20)
+    {
+        <a asp-page="/KepPages/Create" asp-route-albumId="@Model.Album.Id" class="btn btn-primary">Kép hozzáadása</a>
+    }
+</div>
+
+@if (Model.Album.Kep.Count == 0)
+{
+    <p class="text-muted">Ehhez az albumhoz még nem tartozik kép.</p>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var kep in Model.Album.Kep.OrderByDescending(kep => kep.FeltoltesDatuma))
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <img src="@kep.KepUrl" class="card-img-top" alt="@kep.Cim" style="height: 220px; object-fit: cover;" />
+                    <div class="card-body">
+                        <form method="post" asp-page-handler="EditKep" asp-route-id="@Model.Album.Id">
+                            <input type="hidden" asp-for="EditKepId" value="@kep.Id" />
+                            <label asp-for="EditKepCim" class="form-label">Cím</label>
+                            <input asp-for="EditKepCim" value="@kep.Cim" class="form-control mb-2" />
+                            <label asp-for="EditKepUrl" class="form-label">URL</label>
+                            <input asp-for="EditKepUrl" value="@kep.KepUrl" class="form-control mb-2" type="url" />
+                            <label asp-for="EditKepLeiras" class="form-label">Leírás</label>
+                            <textarea asp-for="EditKepLeiras" class="form-control mb-2">@kep.Leiras</textarea>
+                            <button type="submit" class="btn btn-sm btn-primary">Szerkesztés mentése</button>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <form method="post" asp-page-handler="MoveKep" asp-route-id="@Model.Album.Id" class="mb-2">
+                            <input type="hidden" asp-for="MoveKepId" value="@kep.Id" />
+                            <div class="input-group">
+                                <select asp-for="TargetAlbumId" class="form-select">
+                                    <option value="">-- Célalbum --</option>
+                                    @foreach (var album in Model.Albums)
+                                    {
+                                        <option value="@album.Id">@album.Cim</option>
+                                    }
+                                </select>
+                                <button type="submit" class="btn btn-outline-secondary">Áthelyezés</button>
+                            </div>
+                        </form>
+                        <form method="post" asp-page-handler="DeleteKep" asp-route-id="@Model.Album.Id" asp-route-kepId="@kep.Id">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Kép törlése</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Album.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Album.Id">Album szerkesztése</a> |
+    <a asp-page="./Index">Vissza az albumokhoz</a>
 </div>

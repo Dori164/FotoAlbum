@@ -2,28 +2,26 @@
 @model FotoAlbum.Pages.AlbumPages.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Albumok";
 }
 
-<h1>Index</h1>
+<h1>Fotóalbumok</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Új album</a>
 </p>
-<table class="table">
+<table class="table align-middle">
     <thead>
         <tr>
+            <th>Borítókép</th>
             <th>
-                @Html.DisplayNameFor(model => model.Album[0].Cim)
+                Cím
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Album[0].Leiras)
+                Leírás
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Album[0].Letrehozva)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Album[0].Kep)
+                Képek
             </th>
             <th></th>
         </tr>
@@ -32,21 +30,27 @@
 @foreach (var item in Model.Album) {
         <tr>
             <td>
-                @Html.DisplayFor(model => item.Cim)
+                @{ var cover = item.Kep.OrderByDescending(kep => kep.FeltoltesDatuma).FirstOrDefault(); }
+                @if (cover is not null)
+                {
+                    <img src="@cover.KepUrl" alt="@cover.Cim" width="120" height="80" style="object-fit: cover;" />
+                }
+                else
+                {
+                    <span class="text-muted">Nincs kép</span>
+                }
             </td>
             <td>
-                @Html.DisplayFor(model => item.Leiras)
+                <strong>@item.Cim</strong>
             </td>
             <td>
-                @Html.DisplayFor(model => item.Letrehozva)
+                @item.Leiras
             </td>
+            <td>@item.Kep.Count</td>
             <td>
-                @Html.DisplayFor(model => item.Kep)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Details" asp-route-id="@item.Id">Megnyitás</a> |
+                <a asp-page="./Edit" asp-route-id="@item.Id">Szerkesztés</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Törlés</a>
             </td>
         </tr>
 }

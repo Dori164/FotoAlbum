@@ -19,6 +19,9 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        Album = await _context.Album.ToListAsync();
+        Album = await _context.Album
+            .Include(album => album.Kep)
+            .OrderByDescending(album => album.Letrehozva)
+            .ToListAsync();
     }
 }

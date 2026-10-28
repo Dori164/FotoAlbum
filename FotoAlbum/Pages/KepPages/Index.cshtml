@@ -1,0 +1,66 @@
+@page
+@model FotoAlbum.Pages.KepPages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Kep[0].AlbumId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kep[0].Cim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kep[0].KepUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kep[0].Leiras)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kep[0].FeltoltesDatuma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kep[0].Album)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Kep) {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.AlbumId)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Cim)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.KepUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Leiras)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.FeltoltesDatuma)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Album)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

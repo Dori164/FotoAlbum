@@ -1,0 +1,57 @@
+@page
+@model FotoAlbum.Pages.KepPages.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FotoAlbum.Models.Kep</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.AlbumId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.AlbumId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.Cim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.Cim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.KepUrl)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.KepUrl)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.Leiras)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.Leiras)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.FeltoltesDatuma)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.FeltoltesDatuma)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kep.Album)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kep.Album)
+        </dd>
+    </dl>
+    <form method="post">
+        <input type="hidden" asp-for="Kep.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
