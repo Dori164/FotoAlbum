@@ -121,9 +121,9 @@ public class DetailsModel : PageModel
             ModelState.AddModelError(nameof(EditKepCim), "A cím megadása kötelező.");
         }
 
-        if (!IsHttpUrl(EditKepUrl))
+        if (!IsImageReference(EditKepUrl))
         {
-            ModelState.AddModelError(nameof(EditKepUrl), "Csak érvényes http vagy https URL adható meg.");
+            ModelState.AddModelError(nameof(EditKepUrl), "Csak érvényes http/https URL vagy feltöltött /uploads/ útvonal adható meg.");
         }
 
         if (!ModelState.IsValid)
@@ -212,5 +212,12 @@ public class DetailsModel : PageModel
     {
         return Uri.TryCreate(value, UriKind.Absolute, out var uri)
             && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
+    }
+
+    private static bool IsImageReference(string? value)
+    {
+        return IsHttpUrl(value)
+            || (!string.IsNullOrWhiteSpace(value)
+                && value.StartsWith("/uploads/", StringComparison.OrdinalIgnoreCase));
     }
 }

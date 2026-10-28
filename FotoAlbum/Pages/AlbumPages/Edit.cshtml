@@ -15,7 +15,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Album.Id" />
             <div class="form-group">
-                <span class="text-danger">*</span>
                 <label asp-for="Album.Cim" class="control-label"></label>
                 <input asp-for="Album.Cim" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Album.Cim" class="text-danger"></span>
