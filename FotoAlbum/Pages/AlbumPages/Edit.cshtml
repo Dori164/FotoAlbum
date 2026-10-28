@@ -1,0 +1,51 @@
+@page
+@model FotoAlbum.Pages.AlbumPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Album</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Album.Id" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Album.Cim" class="control-label"></label>
+                <input asp-for="Album.Cim" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Album.Cim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Album.Leiras" class="control-label"></label>
+                <input asp-for="Album.Leiras" class="form-control" />
+                <span asp-validation-for="Album.Leiras" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Album.Letrehozva" class="control-label"></label>
+                <input asp-for="Album.Letrehozva" class="form-control" />
+                <span asp-validation-for="Album.Letrehozva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Album.Kep" class="control-label"></label>
+                <input asp-for="Album.Kep" class="form-control" />
+                <span asp-validation-for="Album.Kep" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
